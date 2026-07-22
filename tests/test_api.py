@@ -92,9 +92,24 @@ def test_search_sort_and_pagination(tmp_path: Path, monkeypatch) -> None:
 
     client = TestClient(app)
     todos = [
-        {"title": "FastAPI を学ぶ", "detail": "ルーティングを復習する", "created_by": "alice", "status": "進行中"},
-        {"title": "買い物リスト", "detail": "牛乳を買う", "created_by": "bob", "status": "未着手"},
-        {"title": "FastAPI のテストを書く", "detail": "pytest を使う", "created_by": "carol", "status": "完了"},
+        {
+            "title": "FastAPI を学ぶ",
+            "detail": "ルーティングを復習する",
+            "created_by": "alice",
+            "status": "進行中",
+        },
+        {
+            "title": "買い物リスト",
+            "detail": "牛乳を買う",
+            "created_by": "bob",
+            "status": "未着手",
+        },
+        {
+            "title": "FastAPI のテストを書く",
+            "detail": "pytest を使う",
+            "created_by": "carol",
+            "status": "完了",
+        },
     ]
     for todo in todos:
         response = client.post("/api/todos", json=todo)

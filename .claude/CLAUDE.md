@@ -28,6 +28,7 @@ Run these commands before finalizing changes:
 
 ```bash
 pytest -q
+ruff check .
 ```
 
 For runtime verification:
