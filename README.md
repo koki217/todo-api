@@ -1,5 +1,10 @@
 # TODO Management API
 
+[![Python tests](https://github.com/koki217/todo-api/actions/workflows/python-test.yml/badge.svg)](https://github.com/koki217/todo-api/actions/workflows/python-test.yml)
+[![Lint](https://github.com/koki217/todo-api/actions/workflows/lint.yml/badge.svg)](https://github.com/koki217/todo-api/actions/workflows/lint.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Python 3.14](https://img.shields.io/badge/python-3.14-blue.svg)](https://www.python.org/downloads/release/python-3140/)
+
 A minimal FastAPI-based TODO management API for learning, prototyping, and GitHub publication.
 
 ## Overview
