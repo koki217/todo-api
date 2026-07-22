@@ -1,9 +1,13 @@
 from contextlib import asynccontextmanager
+from typing import Literal
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Query, status
 
 from .db import create_todo, delete_todo, init_db, list_todos, update_todo_status
-from .schemas import TodoCreateRequest, TodoResponse, TodoUpdateRequest
+from .schemas import TodoCreateRequest, TodoResponse, TodoStatus, TodoUpdateRequest
+
+SortField = Literal["id", "title", "created_at", "updated_at"]
+SortOrder = Literal["asc", "desc"]
 
 
 @asynccontextmanager
@@ -27,8 +31,22 @@ def create_todo_endpoint(payload: TodoCreateRequest) -> TodoResponse:
 
 
 @app.get("/api/todos", response_model=list[TodoResponse])
-def list_todos_endpoint() -> list[TodoResponse]:
-    todos = list_todos()
+def list_todos_endpoint(
+    q: str | None = Query(default=None, min_length=1, max_length=255),
+    status_filter: TodoStatus | None = Query(default=None, alias="status"),
+    sort: SortField = Query(default="created_at"),
+    order: SortOrder = Query(default="desc"),
+    limit: int = Query(default=100, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+) -> list[TodoResponse]:
+    todos = list_todos(
+        q=q,
+        status=status_filter.value if status_filter else None,
+        sort=sort,
+        order=order,
+        limit=limit,
+        offset=offset,
+    )
     return [TodoResponse(**todo) for todo in todos]
 
 

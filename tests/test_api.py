@@ -81,6 +81,53 @@ def test_update_status_and_delete_todo(tmp_path: Path, monkeypatch) -> None:
     assert list_response.json() == []
 
 
+def test_search_sort_and_pagination(tmp_path: Path, monkeypatch) -> None:
+    db_path = tmp_path / "test_todos.db"
+    monkeypatch.setenv("TODO_DB_PATH", str(db_path))
+
+    import todo_api.db as database
+    from todo_api.app import app
+
+    database.init_db()
+
+    client = TestClient(app)
+    todos = [
+        {"title": "FastAPI を学ぶ", "detail": "ルーティングを復習する", "created_by": "alice", "status": "進行中"},
+        {"title": "買い物リスト", "detail": "牛乳を買う", "created_by": "bob", "status": "未着手"},
+        {"title": "FastAPI のテストを書く", "detail": "pytest を使う", "created_by": "carol", "status": "完了"},
+    ]
+    for todo in todos:
+        response = client.post("/api/todos", json=todo)
+        assert response.status_code == 201
+
+    search_response = client.get("/api/todos", params={"q": "FastAPI"})
+    assert search_response.status_code == 200
+    search_items = search_response.json()
+    assert len(search_items) == 2
+    assert all("FastAPI" in item["title"] for item in search_items)
+
+    status_response = client.get("/api/todos", params={"status": "完了"})
+    assert status_response.status_code == 200
+    status_items = status_response.json()
+    assert len(status_items) == 1
+    assert status_items[0]["title"] == "FastAPI のテストを書く"
+
+    sort_response = client.get("/api/todos", params={"sort": "title", "order": "asc"})
+    assert sort_response.status_code == 200
+    sorted_titles = [item["title"] for item in sort_response.json()]
+    assert sorted_titles == sorted(sorted_titles)
+
+    page_response = client.get("/api/todos", params={"limit": 2, "offset": 1})
+    assert page_response.status_code == 200
+    assert len(page_response.json()) == 2
+
+    invalid_sort_response = client.get("/api/todos", params={"sort": "not_a_column"})
+    assert invalid_sort_response.status_code == 422
+
+    invalid_limit_response = client.get("/api/todos", params={"limit": 0})
+    assert invalid_limit_response.status_code == 422
+
+
 def test_invalid_status_is_rejected(tmp_path: Path, monkeypatch) -> None:
     db_path = tmp_path / "test_todos.db"
     monkeypatch.setenv("TODO_DB_PATH", str(db_path))
