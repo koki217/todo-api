@@ -91,6 +91,14 @@ The expected standard is:
 - no new regression is introduced
 - the app remains runnable from the repository configuration
 
+## Release / Tagging
+
+- Bump the `version` field in `pyproject.toml` before tagging a release.
+- Tag the corresponding commit on `main` with `v<version>` (e.g. `v0.1.0`),
+  matching the `pyproject.toml` version.
+- Pushing a `v*` tag triggers the `Release` GitHub Actions workflow, which
+  creates a GitHub Release with auto-generated release notes from merged PRs.
+
 ## Coding Conventions
 
 - Use Python naming conventions such as `snake_case` for functions and variables.
