@@ -84,13 +84,46 @@ def create_todo(title: str, detail: str, created_by: str, status: str) -> dict[s
     return dict(row)
 
 
-def list_todos() -> list[dict[str, Any]]:
+_SORTABLE_COLUMNS = {"id", "title", "created_at", "updated_at"}
+
+
+def list_todos(
+    q: str | None = None,
+    status: str | None = None,
+    sort: str = "created_at",
+    order: str = "desc",
+    limit: int = 100,
+    offset: int = 0,
+) -> list[dict[str, Any]]:
+    if sort not in _SORTABLE_COLUMNS:
+        sort = "created_at"
+    direction = "ASC" if order == "asc" else "DESC"
+
+    conditions: list[str] = []
+    params: list[Any] = []
+
+    if q:
+        conditions.append("(title LIKE ? OR detail LIKE ?)")
+        like_pattern = f"%{q}%"
+        params.extend([like_pattern, like_pattern])
+
+    if status:
+        conditions.append("status = ?")
+        params.append(status)
+
+    where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    params.extend([limit, offset])
+
     with get_connection() as connection:
         rows = connection.execute(
-            """
+            f"""
             SELECT id, title, detail, created_by, status, created_at, updated_at
-            FROM todos ORDER BY id DESC
-            """
+            FROM todos
+            {where_clause}
+            ORDER BY {sort} {direction}, id DESC
+            LIMIT ? OFFSET ?
+            """,
+            params,
         ).fetchall()
     return [dict(row) for row in rows]
 

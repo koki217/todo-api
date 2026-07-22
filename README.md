@@ -96,6 +96,19 @@ curl -X POST http://127.0.0.1:8000/api/todos \
 curl http://127.0.0.1:8000/api/todos
 ```
 
+Optional query parameters:
+
+- `q` — search keyword matched against `title` and `detail` (substring match)
+- `status` — filter by exact status (`未着手` / `進行中` / `完了` / `保留`)
+- `sort` — one of `id`, `title`, `created_at`, `updated_at` (default: `created_at`)
+- `order` — `asc` or `desc` (default: `desc`)
+- `limit` — page size, 1–100 (default: `100`)
+- `offset` — number of items to skip (default: `0`)
+
+```bash
+curl "http://127.0.0.1:8000/api/todos?q=FastAPI&status=進行中&sort=title&order=asc&limit=10&offset=0"
+```
+
 ### Update a TODO status
 
 ```bash
