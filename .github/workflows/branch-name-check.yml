@@ -1,0 +1,23 @@
+name: Branch name check
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  validate-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch naming policy
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          echo "Branch name: ${HEAD_REF}"
+
+          if [[ ! "${HEAD_REF}" =~ ^(feature|fix|docs|chore|refactor)/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo "Branch name must follow the rule: <type>/<issue-number>-<short-description>"
+            echo "Examples: feature/1-add-search-pagination, fix/2-fix-status-update"
+            exit 1
+          fi
+
+          echo "Branch name is valid."
