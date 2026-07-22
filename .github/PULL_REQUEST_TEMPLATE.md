@@ -25,6 +25,7 @@ Explain the reason for the change.
 ## Validation
 
 - [ ] `pytest -q`
+- [ ] `ruff check .`
 - [ ] Local API startup checked
 - [ ] CI expectations reviewed
 

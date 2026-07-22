@@ -65,6 +65,7 @@ When using Claude Code for implementation, keep the following in mind:
 Before opening a pull request:
 
 - Run `pytest -q` successfully.
+- Run `ruff check .` successfully.
 - Confirm the API still starts locally.
 - Keep the change scoped to the problem being solved.
 - Avoid unrelated formatting or refactoring in the same change.
