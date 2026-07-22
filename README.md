@@ -178,6 +178,10 @@ It is suitable as a personal learning portfolio project and a starting point for
 
 For contribution guidelines, development workflow, and CI expectations, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a history of notable changes.
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
