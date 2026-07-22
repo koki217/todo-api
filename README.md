@@ -178,6 +178,23 @@ It is suitable as a personal learning portfolio project and a starting point for
 
 For contribution guidelines, development workflow, and CI expectations, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+### Development Flow
+
+```mermaid
+flowchart LR
+    A["Create an issue"] --> B["Create a branch\n(BRANCH_NAME_POLICY.md)"]
+    B --> C["Open a PR\n(PULL_REQUEST_TEMPLATE.md)"]
+    C --> D["CI runs\n(tests / lint / branch name)"]
+    D --> E["Merge\n(issue auto-closes via Closes #N)"]
+```
+
+| Step | Rule reference |
+| --- | --- |
+| Branch name | [`BRANCH_NAME_POLICY.md`](./.github/BRANCH_NAME_POLICY.md) |
+| PR content | [`PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md) |
+| CI checks | `.github/workflows/` (`python-test.yml`, `lint.yml`, `branch-name-check.yml`) |
+| Overall workflow | [`CONTRIBUTING.md`](./CONTRIBUTING.md) |
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
