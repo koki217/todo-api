@@ -84,10 +84,11 @@ validation if the change is non-trivial.
    git push -u origin <branch-name>
    ```
 2. Write the PR body following `.github/PULL_REQUEST_TEMPLATE.md` (Summary /
-   Branch naming / Why / Changes / Validation checklist / Notes). Link the
-   issue — existing PRs use a `関連` section with `- #<issue-number>`; use
-   `Closes #<issue-number>` instead only if the PR should auto-close the issue
-   on merge.
+   Related issue / Why / Changes / Validation checklist / Notes). Always link
+   the issue with `Closes #<issue-number>` in the Related issue section so
+   GitHub auto-closes the issue when the PR is merged into `main`. Only use a
+   non-closing reference (e.g. `Related to #<issue-number>`) if the PR is
+   partial work that should not close the issue on its own.
 3. Open as a **draft** by default (matches existing repo practice):
    ```bash
    gh pr create --repo koki217/todo-api \
