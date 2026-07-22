@@ -14,6 +14,11 @@ The app supports:
 
 The goal is to keep the implementation easy to understand, easy to test, and easy to publish.
 
+> **No authentication.** This API has no authentication, user management, or
+> access control of any kind — every endpoint is open to anyone who can reach
+> it. It is intended for local learning and portfolio use only, and is not
+> meant to be deployed as a public-facing production service.
+
 ## Tech Stack
 
 - Python 3.14
