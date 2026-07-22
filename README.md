@@ -94,6 +94,20 @@ If you want to run from the repository root without editable install, use:
 PYTHONPATH=src uvicorn todo_api.app:app --reload
 ```
 
+## API Reference
+
+Once the server is running, FastAPI serves a full, always up-to-date API
+reference generated directly from the code — no separate reference doc to
+keep in sync:
+
+- **Swagger UI**: <http://127.0.0.1:8000/docs> — browse every endpoint,
+  request/response shapes, and try calls directly from the browser
+- **ReDoc**: <http://127.0.0.1:8000/redoc> — a read-only, more compact view
+  of the same reference
+
+The endpoint summaries below are a quick-start cheat sheet; `/docs` and
+`/redoc` are the source of truth for the full request/response schema.
+
 ## API Endpoints
 
 ### Create a TODO
