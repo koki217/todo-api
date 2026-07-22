@@ -42,7 +42,6 @@ def init_db() -> None:
             CREATE TABLE IF NOT EXISTS todos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
-                done INTEGER NOT NULL DEFAULT 0,
                 created_at TEXT NOT NULL,
                 detail TEXT NOT NULL DEFAULT '',
                 created_by TEXT NOT NULL DEFAULT '',
