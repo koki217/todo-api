@@ -128,6 +128,40 @@ def test_search_sort_and_pagination(tmp_path: Path, monkeypatch) -> None:
     assert invalid_limit_response.status_code == 422
 
 
+def test_error_response_format_is_consistent(tmp_path: Path, monkeypatch) -> None:
+    db_path = tmp_path / "test_todos.db"
+    monkeypatch.setenv("TODO_DB_PATH", str(db_path))
+
+    import todo_api.db as database
+    from todo_api.app import app
+
+    database.init_db()
+
+    client = TestClient(app)
+
+    not_found_response = client.delete("/api/todos/9999")
+    assert not_found_response.status_code == 404
+    not_found_body = not_found_response.json()
+    assert isinstance(not_found_body["detail"], str)
+    assert not_found_body["errors"] is None
+
+    validation_response = client.post(
+        "/api/todos",
+        json={
+            "title": "不正な入力",
+            "detail": "無効なステータスを送る",
+            "created_by": "dave",
+            "status": "不正な値",
+        },
+    )
+    assert validation_response.status_code == 422
+    validation_body = validation_response.json()
+    assert isinstance(validation_body["detail"], str)
+    assert isinstance(validation_body["errors"], list)
+    assert len(validation_body["errors"]) >= 1
+    assert {"field", "message"} <= validation_body["errors"][0].keys()
+
+
 def test_invalid_status_is_rejected(tmp_path: Path, monkeypatch) -> None:
     db_path = tmp_path / "test_todos.db"
     monkeypatch.setenv("TODO_DB_PATH", str(db_path))

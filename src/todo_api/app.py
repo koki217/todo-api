@@ -1,7 +1,10 @@
 from contextlib import asynccontextmanager
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Query, status
+from fastapi import FastAPI, HTTPException, Query, Request, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .db import create_todo, delete_todo, init_db, list_todos, update_todo_status
 from .schemas import TodoCreateRequest, TodoResponse, TodoStatus, TodoUpdateRequest
@@ -17,6 +20,33 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="TODO API", version="1.0.0", lifespan=lifespan)
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(
+    request: Request, exc: RequestValidationError
+) -> JSONResponse:
+    errors = [
+        {
+            "field": ".".join(str(part) for part in error["loc"] if part != "body"),
+            "message": error["msg"],
+        }
+        for error in exc.errors()
+    ]
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"detail": "リクエストの内容が不正です", "errors": errors},
+    )
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(
+    request: Request, exc: StarletteHTTPException
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "errors": None},
+    )
 
 
 @app.post("/api/todos", response_model=TodoResponse, status_code=status.HTTP_201_CREATED)
