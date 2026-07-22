@@ -44,20 +44,15 @@ Note the returned issue number — it drives the branch name in Step 2.
 
 ## Step 2 — Create the Branch
 
-Branch names must match `.github/BRANCH_NAME_POLICY.md`, which is also
-enforced by CI (`.github/workflows/branch-name-check.yml`):
-
-```
-<type>/<issue-number>-<short-description>
-```
-
-- `type` ∈ `feature`, `fix`, `docs`, `chore`, `refactor`
-- all lowercase, words separated by `-`, no spaces or underscores
-- `short-description` is a short English description
+Branch names must follow the policy defined in
+`.github/BRANCH_NAME_POLICY.md` (also enforced by CI via
+`.github/workflows/branch-name-check.yml`). That file is the source of
+truth for the exact format and allowed `type` values — read it before
+naming the branch rather than relying on a summary here.
 
 ```bash
 git switch main && git pull
-git switch -c feature/<issue-number>-<short-description>
+git switch -c <type>/<issue-number>-<short-description>
 ```
 
 Example: `feature/3-add-due-date-field`
