@@ -2,6 +2,12 @@
 
 Describe the change briefly.
 
+## Branch naming
+
+Use a branch name that follows the policy in `.github/BRANCH_NAME_POLICY.md`.
+
+Example: `feature/1-add-search-pagination`
+
 ## Related issue
 
 Closes #<!-- issue number -->
