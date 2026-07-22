@@ -7,6 +7,7 @@ on:
 jobs:
   validate-branch-name:
     runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.head_ref, 'dependabot/') }}
     steps:
       - name: Validate branch naming policy
         env:

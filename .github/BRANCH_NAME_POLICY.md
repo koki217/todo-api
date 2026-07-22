@@ -26,6 +26,14 @@
 - `chore/4-update-ci-config`
 - `refactor/5-clean-api-structure`
 
+## 例外
+
+- Dependabot が自動生成するブランチ(`dependabot/pip/...`、
+  `dependabot/github_actions/...`)はこの命名規則の対象外とする。
+  Dependabot側でブランチ名を本ポリシーに合わせることはできないため、
+  `.github/workflows/branch-name-check.yml` で `dependabot/` から始まる
+  ブランチはチェック自体をスキップする。
+
 ## 目的
 
 - PR のレビュー対象が把握しやすい
