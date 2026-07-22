@@ -2,6 +2,10 @@
 
 Describe the change briefly.
 
+## Related issue
+
+Closes #<!-- issue number -->
+
 ## Why
 
 Explain the reason for the change.
