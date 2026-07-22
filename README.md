@@ -128,6 +128,21 @@ curl -X PATCH http://127.0.0.1:8000/api/todos/1 \
 curl -X DELETE http://127.0.0.1:8000/api/todos/1
 ```
 
+## Error Responses
+
+All errors — including validation errors (422) and business errors like a
+missing TODO (404) — share the same JSON shape:
+
+```json
+{
+  "detail": "human-readable message",
+  "errors": null
+}
+```
+
+`errors` is `null` for simple errors (e.g. "todo not found") and a list of
+`{"field": "...", "message": "..."}` objects for request validation failures.
+
 ## Database
 
 The app uses SQLite and stores data in a local file named `todos.db` by default.

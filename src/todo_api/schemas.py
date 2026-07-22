@@ -29,3 +29,13 @@ class TodoResponse(BaseModel):
     status: TodoStatus
     created_at: str
     updated_at: str
+
+
+class ErrorDetail(BaseModel):
+    field: str
+    message: str
+
+
+class ErrorResponse(BaseModel):
+    detail: str
+    errors: list[ErrorDetail] | None = None
