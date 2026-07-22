@@ -1,0 +1,28 @@
+name: Feature request
+description: 新しい機能や改善の提案に使用してください
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: 何を実現したいか、なぜ必要かを記載してください
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: 実装後、どのような振る舞いになっていればよいか
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: 対象となるファイル、関連issueなど
+    validations:
+      required: false
