@@ -60,6 +60,7 @@ This repository now includes repository-scoped agent and skill definitions under
 - Use `test-qa` for validating behavior changes and updating tests.
 - Use `release-maintainer` for GitHub publication and repository hygiene work.
 - Use the local skills for CRUD implementation, test guardrails, and publication-readiness guidance.
+- Use the `issue-pr-workflow` skill when creating GitHub issues or opening pull requests, so branch names, issue bodies, and PR bodies follow this repo's templates and branch naming policy.
 
 ## Notes
 
