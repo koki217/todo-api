@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-22
+
 ### Added
 
 - GitHub Issue Forms (`bug_report.yml` / `feature_request.yml`) replacing the
@@ -13,6 +15,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Milestones (`v0.1.0`, `v0.2.0`, `v0.3.0`) grouping issues by release phase
 - A public GitHub Projects board tracking issue status
 - This CHANGELOG
+- README: architecture diagram, development flow diagram, and links to the
+  auto-generated API reference (Swagger UI `/docs`, ReDoc `/redoc`)
+
+### Changed
+
+- Updated dependencies via Dependabot: `fastapi`, `pytest`, `httpx`,
+  `pydantic`, `uvicorn`, and the `actions/checkout`, `actions/setup-python`,
+  `softprops/action-gh-release` GitHub Actions
+
+### Fixed
+
+- Dependabot-created branches no longer fail `branch-name-check` (they are
+  now exempt from the repo's branch naming policy, which they cannot follow)
+- Replaced the deprecated `HTTP_422_UNPROCESSABLE_ENTITY` constant with
+  `HTTP_422_UNPROCESSABLE_CONTENT`
 
 ## [0.1.0] - 2026-07-22
 
