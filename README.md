@@ -11,6 +11,15 @@ A minimal FastAPI-based TODO management API for learning, prototyping, and GitHu
 
 This repository implements a small REST API with SQLite persistence.
 
+```mermaid
+flowchart LR
+    Client["Client (curl / browser)"] -->|HTTP JSON| API["FastAPI app<br/>(src/todo_api/app.py)"]
+    API -->|SQL| DB[("SQLite<br/>todos.db")]
+```
+
+The app is a single FastAPI process backed by a local SQLite file — there is
+no separate database server or background worker.
+
 The app supports:
 - creating a TODO item with `title`, `detail`, `created_by`, and `status`
 - listing all TODO items
@@ -194,6 +203,10 @@ flowchart LR
 | PR content | [`PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md) |
 | CI checks | `.github/workflows/` (`python-test.yml`, `lint.yml`, `branch-name-check.yml`) |
 | Overall workflow | [`CONTRIBUTING.md`](./CONTRIBUTING.md) |
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a history of notable changes.
 
 ## License
 
