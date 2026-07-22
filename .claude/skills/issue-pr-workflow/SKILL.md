@@ -23,11 +23,13 @@ Trigger on requests like "issueを作って", "〜のPRを作って", "この変
 
 ## Step 1 — Create the Issue
 
-Follow the structure in `.github/ISSUE_TEMPLATE.md` (Summary / Expected
-behavior / Actual behavior / Steps to reproduce / Environment / Additional
-context). For feature requests, at minimum fill in Summary and Expected
-behavior — omit sections that don't apply rather than leaving template
-placeholders in the body.
+Follow the structure defined in `.github/ISSUE_TEMPLATE/` — use
+`bug_report.yml`'s fields (Summary / Expected behavior / Actual behavior /
+Steps to reproduce / environment info) for defects, or
+`feature_request.yml`'s fields (Summary / Expected behavior / Additional
+context) for new functionality. `gh issue create` doesn't render the YAML
+form, so write the body as plain Markdown headings matching those field
+names, and omit fields that don't apply rather than leaving placeholders.
 
 Pick a label from the repo's existing set only if it clearly applies: `bug`,
 `enhancement`, `documentation`, `question`, `good first issue`, `help wanted`,

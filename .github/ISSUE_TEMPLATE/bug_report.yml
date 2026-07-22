@@ -1,0 +1,63 @@
+name: Bug report
+description: 動作が期待通りでない場合に使用してください
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: 問題の概要を簡潔に記載してください
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: 本来どのように動作すべきか
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: 実際にどのように動作しているか
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: 再現手順
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: false
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "3.14"
+    validations:
+      required: false
+
+  - type: input
+    id: branch-or-commit
+    attributes:
+      label: Branch or commit
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: ログ、スクリーンショット、関連issueなど
+    validations:
+      required: false
